@@ -1,12 +1,16 @@
-const { UserService } = require('../Services');
+const { UserService } = require('../MySQL/sqlServices');
 const { logger } = require('../config/winston');
+const { User } = require('../MySQL/sqlModels');
 
 const userController = {
+
     allUser: async (req, res, next) => {
         try {
             const allUser = await UserService.allUser();
+
             res.status(200).json({
                 isSuccess: true,
+                code: 200,
                 message: "모든 사용자 정보 조회 성공",
                 result: allUser
             });
@@ -40,10 +44,10 @@ const userController = {
     },
 
     createUser: async (req, res, next) => {
-        const { name, age, married, comment } = req.body;
+        const { user_id, password, email, name, age, gender } = req.body;
 
         try {
-            const result = await UserService.createUser(name, age, married, comment);
+            const result = await UserService.createUser(user_id, password, email, name, age, gender);
             if (result) {
                 res.status(201).json({
                     isSuccess: true,
@@ -51,10 +55,7 @@ const userController = {
                 })
             }
         } catch (err) {
-            res.status(500).json({
-                isSuccess: false,
-                message: err
-            })
+            console.log(err);
             next(err);
         }
     },

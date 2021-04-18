@@ -1,15 +1,15 @@
-const { User } = require('../models');
+const { User } = require('../sqlModels');
 
 const userService = {
     allUser: async () => {
         try {
             const allUser = await User.findAll();
-        
+
             return allUser;
         } catch (exception) {
             throw exception;
         }
-    }, 
+    },
 
     userInfo: async (userId) => {
         try {
@@ -26,13 +26,15 @@ const userService = {
         }
     },
 
-    createUser: async (name, age, married, comment) => {
-        try { 
+    createUser: async (user_id, password, email, name, age, gender) => {
+        try {
             await User.create({
-                name: name,
-                age: age,
-                married: married,
-                comment: comment
+                user_id,
+                password,
+                email,
+                name,
+                age,
+                gender
             });
 
             return true;

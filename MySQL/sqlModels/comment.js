@@ -22,8 +22,4 @@ module.exports = class Comment extends Sequelize.Model {
             collate: 'utf8bm4_general_ci',
         });
     }
-
-    static associate(db) {
-        db.Comment.belongsTo(db.User, { foreignKey: 'commenter', targetKey: 'id'});
-    }
 };
