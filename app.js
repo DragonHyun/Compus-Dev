@@ -1,16 +1,18 @@
 const createError = require('http-errors');
+const errorHandler = require('./middlewares/error-handler');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const moment = require('moment');
-const { logger, stream } = require('./config/winston');
+//const { logger, stream } = require('./config/winston');
 const mongoose = require('mongoose');
 const mongoUrl = require('./config/mongodb.json').mongodbUrl;
+const passport = require('passport');
+const passportConfig = require('./util/passport');
 
 const routes = require('./Routes');
 
-const { sequelize } = require('./MySQL/sqlModels');
+const { sequelize } = require('./MySQL/Models');
 
 const app = express();
 
@@ -30,20 +32,23 @@ mongoose.connect(mongoUrl, {
 }).then(() => console.log('MongoDB connected'))
     .catch((err) => console.error(err));
 
-app.use(morgan('dev', { stream }));
+//app.use(morgan('dev', { stream }));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+passportConfig();
 app.use(routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
 });
-
+app.use(errorHandler);
 // error handler
-app.use(function (err, req, res, next) {
+/*app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     //res.locals.message = err.message;
     //res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -67,5 +72,6 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json(errObj);
 });
+*/
 
 module.exports = app;
