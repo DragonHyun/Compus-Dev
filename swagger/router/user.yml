@@ -1,0 +1,12 @@
+paths:
+  /user:
+    get:
+      summary: all user
+      tags: [user]
+      response:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"

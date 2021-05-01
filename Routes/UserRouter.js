@@ -1,12 +1,47 @@
 const express = require('express');
 const router = express.Router();
 const { UserController } = require('../Controllers');
+const passport = require('passport');
 
-router.post('/', UserController.signIn);
+/**
+ * @swagger
+ * definitions:
+ *  Users:
+ *      required:
+ *          -name
+ *      properties:
+ *          id:
+ *              type: integer
+ *          name:
+ *              type: string
+ */
+
+/**
+ * @swagger
+ * tags:
+ *     name: Users
+ */
+
+/**
+ * @swagger
+ * /user:
+ *     get:
+ *         summary: abc
+ *         description: abcd
+ *         tags: [Users]
+ *         produces:
+ *             - application/json
+ *         responses:
+ *             200:
+ *                 description: Success
+ */
+
+router.post('/check/unique', UserController.checkUnique);
+router.post('/signup', UserController.signUp);
+router.post('/signin', UserController.signIn);
+
+router.patch('/', passport.authenticate('jwt', { session: false }), UserController.modifyUser);
+
 router.get('/', UserController.allUser);
-router.get('/:userId', UserController.getUserInfo);
-router.post('/', UserController.createUser);
-router.patch('/:userId', UserController.updateUser);
-router.delete('/:userId', UserController.deleteUser);
 
 module.exports = router;

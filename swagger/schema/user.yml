@@ -1,0 +1,22 @@
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: integer
+          description: 유저 uid
+        user_id:
+          type: string
+          description: 유저 id
+        email:
+          type: string
+          description: 유저 이메일
+        name:
+          type: string
+          description: 유저 이름
+        age:
+          type: integer
+          description: 유저 나이
+        gender:
+          type: string
+          description: 유저 성별
