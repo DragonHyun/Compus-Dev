@@ -111,9 +111,13 @@ const userService = {
 
     allUser: async () => {
         try {
+<<<<<<< HEAD
             const allUser = await User.findAll({
                 attributes: ['id', 'user_id', 'email', 'name', 'age', 'gender']
             });
+=======
+            const allUser = await User.findAll();
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
 
             return allUser;
         } catch (exception) {

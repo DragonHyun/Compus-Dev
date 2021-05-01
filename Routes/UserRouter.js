@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { UserController } = require('../Controllers');
 const passport = require('passport');
+<<<<<<< HEAD
 
 /**
  * @swagger
@@ -42,6 +43,14 @@ router.post('/signin', UserController.signIn);
 
 router.patch('/', passport.authenticate('jwt', { session: false }), UserController.modifyUser);
 
+=======
+
+router.post('/check/unique', UserController.checkUnique);
+router.post('/signup', UserController.signUp);
+router.post('/signin', UserController.signIn);
+
+router.patch('/', passport.authenticate('jwt', { session: false }), UserController.modifyUser);
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
 router.get('/', UserController.allUser);
 
 module.exports = router;

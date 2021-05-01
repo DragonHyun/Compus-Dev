@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
-const { secretKey, options } = require('../config/secretkey');
+const { secretKey, options } = require('../config/jwtSecretKey');
+<<<<<<< HEAD
 const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
+=======
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
 
 module.exports = {
     createToken: async (user) => {
@@ -9,6 +12,10 @@ module.exports = {
             id: user.id,
             email: user.email,
         };
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
         const result = {
             token: jwt.sign(payload, secretKey, options),
         };
@@ -17,6 +24,7 @@ module.exports = {
 
     verifyToken: async (token) => {
         let decoded;
+<<<<<<< HEAD
         try {
             decoded = jwt.verify(token, secretKey);
         } catch (err) {
@@ -31,6 +39,13 @@ module.exports = {
                 console.log('invalid token');
                 return TOKEN_INVALID;
             }
+=======
+        
+        try{
+            decoded = jwt.verify(token, secretKey);
+        } catch (err) {
+            next(err);
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
         }
 
         return decoded;

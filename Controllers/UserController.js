@@ -1,10 +1,17 @@
 const { UserService } = require('../MySQL/Services');
+<<<<<<< HEAD
 const { logger } = require('../config/winston');
+=======
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
 const passport = require('passport');
 const jwt = require('../util/jwt');
 
 const CustomError = require('../util/custom-error');
 const { isDefined } = require('../util/function');
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5f50a74cc5ad0cfe89f21d83034893c17f04e9e
 
 const userController = {
 
